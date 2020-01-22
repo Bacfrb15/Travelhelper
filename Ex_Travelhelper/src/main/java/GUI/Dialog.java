@@ -5,15 +5,24 @@
  */
 package GUI;
 
+import BL.Destination;
+
 /**
  *
  * @author franz
  */
 public class Dialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Dialog
-     */
+    private boolean ok = false;
+    private String destname;
+    private Destination d;
+    private int zipcode;
+    
+    public boolean isOk()
+    {
+        return ok;
+    }
+    
     public Dialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,22 +37,60 @@ public class Dialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jLabel2 = new javax.swing.JLabel();
+        tfDestination = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfZipCode = new javax.swing.JTextField();
+        btOk = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout(3, 2));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Destination");
+        getContentPane().add(jLabel2);
+        getContentPane().add(tfDestination);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Zip-Code");
+        getContentPane().add(jLabel3);
+        getContentPane().add(tfZipCode);
+
+        btOk.setText("OK");
+        btOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onOK(evt);
+            }
+        });
+        getContentPane().add(btOk);
+
+        btCancel.setText("CANCEL");
+        btCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onCancel(evt);
+            }
+        });
+        getContentPane().add(btCancel);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void onOK(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onOK
+        destname = tfDestination.getText();
+        zipcode = Integer.parseInt(tfZipCode.getText());
+        d = new Destination(destname, zipcode);
+        ok = true;
+        this.dispose();
+    }//GEN-LAST:event_onOK
+
+    private void onCancel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCancel
+        this.dispose();
+    }//GEN-LAST:event_onCancel
+
+    public Destination getD() {
+        return d;
+    }
     /**
      * @param args the command line arguments
      */
@@ -87,5 +134,11 @@ public class Dialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancel;
+    private javax.swing.JButton btOk;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField tfDestination;
+    private javax.swing.JTextField tfZipCode;
     // End of variables declaration//GEN-END:variables
 }

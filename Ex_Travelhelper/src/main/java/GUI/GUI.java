@@ -5,17 +5,20 @@
  */
 package GUI;
 
+import BL.Destination;
+import BL.WeatherTableModel;
+
 /**
  *
  * @author franz
  */
 public class GUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI
-     */
+    private WeatherTableModel tm = new WeatherTableModel();
+    
     public GUI() {
         initComponents();
+        tbDataTable.setModel(tm);
     }
 
     /**
@@ -27,23 +30,56 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbDataTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jMenu1.setText("File");
+        tbDataTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tbDataTable);
+
+        getContentPane().add(jScrollPane1);
+
+        jMenu1.setText("Edit");
+
+        jMenuItem1.setText("AddDestination");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onAddDestination(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void onAddDestination(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAddDestination
+        Dialog dlg = new Dialog(this, true);
+        dlg.setVisible(true); 
+        if(dlg.isOk())
+        {
+            Destination d = dlg.getD();
+            tm.addDestination(d);           
+        }
+    }//GEN-LAST:event_onAddDestination
 
     /**
      * @param args the command line arguments
@@ -82,7 +118,9 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbDataTable;
     // End of variables declaration//GEN-END:variables
 }
