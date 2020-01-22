@@ -41,5 +41,9 @@ public class WeatherTableModel extends AbstractTableModel{
         datalist.add(d);
         fireTableRowsInserted(datalist.size()-1, datalist.size()-1);
     }
-    
+    public void deleteDestinations(int idx)
+    {
+        datalist.remove(idx);
+        fireTableRowsDeleted(datalist.size()-1, datalist.size()-1);
+    }
 }
