@@ -6,7 +6,6 @@
 package GUI;
 
 import BL.Destination;
-import BL.WeatherTableModel;
 
 /**
  *
@@ -15,6 +14,7 @@ import BL.WeatherTableModel;
 public class GUI extends javax.swing.JFrame {
 
     private WeatherTableModel tm = new WeatherTableModel();
+    private WeatherDataGUI dg = new WeatherDataGUI();
     
     public GUI() {
         initComponents();
@@ -30,12 +30,26 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDataTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+
+        jMenuItem3.setText("Show Weather Data");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onWeatherData(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Show 5 Day Forecast");
+        jPopupMenu1.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
@@ -51,6 +65,7 @@ public class GUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbDataTable.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(tbDataTable);
 
         getContentPane().add(jScrollPane1);
@@ -95,6 +110,10 @@ public class GUI extends javax.swing.JFrame {
        tm.deleteDestinations(idx);
     }//GEN-LAST:event_onRemove
 
+    private void onWeatherData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onWeatherData
+        dg.setVisible(true);
+    }//GEN-LAST:event_onWeatherData
+
     /**
      * @param args the command line arguments
      */
@@ -135,6 +154,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbDataTable;
     // End of variables declaration//GEN-END:variables

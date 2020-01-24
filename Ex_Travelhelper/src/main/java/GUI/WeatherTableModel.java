@@ -1,5 +1,6 @@
-package BL;
+package GUI;
 
+import BL.Destination;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
