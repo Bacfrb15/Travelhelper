@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BL;
+package WeatherAPIoneday;
 
+import java.awt.Image;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,9 +20,9 @@ public class WeatherData {
     private double windspeed;
     private double humidity;
     private double pressure;
-    private ImageIcon icon;
+    private Image icon;
 
-    public WeatherData(String destination, String country, double temp, double windspeed, double humidity, double pressure, ImageIcon icon) {
+    public WeatherData(String destination, String country, double temp, double windspeed, double humidity, double pressure, Image icon) {
         this.destination = destination;
         this.country = country;
         this.temp = temp;
@@ -78,11 +80,11 @@ public class WeatherData {
         this.pressure = pressure;
     }
 
-    public ImageIcon getIcon() {
+    public Image getIcon() {
         return icon;
     }
 
-    public void setIcon(ImageIcon icon) {
+    public void setIcon(Image icon) {
         this.icon = icon;
     }
 

@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import BL.Destination;
+import WeatherAPIoneday.Destination;
 
 /**
  *

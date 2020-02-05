@@ -1,5 +1,9 @@
-package BL;
+package WeatherAPIfiveday;
 
+/**
+ *
+ * @author franz
+ */
 public class Coord {
 
     private float lon;

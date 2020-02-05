@@ -1,6 +1,6 @@
 package GUI;
 
-import BL.Destination;
+import WeatherAPIoneday.Destination;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -46,5 +46,15 @@ public class WeatherTableModel extends AbstractTableModel{
     {
         datalist.remove(idx);
         fireTableRowsDeleted(datalist.size()-1, datalist.size()-1);
+    }
+    
+    public Destination getDestination(int index)
+    {
+        return datalist.get(index);
+    }
+    
+    public ArrayList getDestinations()
+    {
+        return datalist;
     }
 }

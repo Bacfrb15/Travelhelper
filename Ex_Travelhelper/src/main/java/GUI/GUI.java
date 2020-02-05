@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import BL.Destination;
+import WeatherAPIoneday.Destination;
 
 /**
  *
@@ -49,6 +49,11 @@ public class GUI extends javax.swing.JFrame {
         jPopupMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Show 5 Day Forecast");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onForecastData(evt);
+            }
+        });
         jPopupMenu1.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,7 +117,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void onWeatherData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onWeatherData
         dg.setVisible(true);
+        dg.showWeatherData(tm.getDestinations());
     }//GEN-LAST:event_onWeatherData
+
+    private void onForecastData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onForecastData
+        dg.setVisible(true);
+        dg.showForecastData(tm.getDestination(tbDataTable.getSelectedRow()));
+    }//GEN-LAST:event_onForecastData
 
     /**
      * @param args the command line arguments

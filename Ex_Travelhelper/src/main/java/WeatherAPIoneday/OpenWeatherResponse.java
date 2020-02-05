@@ -1,5 +1,11 @@
-package BL;
+package WeatherAPIoneday;
 
+import WeatherAPIoneday.Main;
+import WeatherAPIoneday.Coord;
+import WeatherAPIoneday.Clouds;
+import WeatherAPIoneday.Sys;
+import WeatherAPIoneday.Weather;
+import WeatherAPIoneday.Wind;
 import java.util.List;
 
 public class OpenWeatherResponse {

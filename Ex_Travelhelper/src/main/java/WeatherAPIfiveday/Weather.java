@@ -1,4 +1,4 @@
-package BL;
+package WeatherAPIfiveday;
 
 public class Weather {
 

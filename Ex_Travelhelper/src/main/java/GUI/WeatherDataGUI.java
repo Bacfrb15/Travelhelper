@@ -5,6 +5,15 @@
  */
 package GUI;
 
+import WeatherAPIoneday.Destination;
+import WeatherAPIoneday.OpenWeatherResponse;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 /**
  *
  * @author franz
@@ -13,11 +22,25 @@ public class WeatherDataGUI extends javax.swing.JFrame {
 
     private WeatherDataModel dm = new WeatherDataModel();
     private WeatherDataRenderer wdr = new WeatherDataRenderer();
+    private Forecast5DayModel fdm = new Forecast5DayModel();
+    private Forecast5DayRenderer fdr = new Forecast5DayRenderer();
     
     public WeatherDataGUI() {
-        initComponents();
+        initComponents();  
+    }
+    
+    public void showWeatherData(ArrayList<Destination> destination)
+    {
         tbWeatherData.setModel(dm);
         tbWeatherData.setDefaultRenderer(Object.class, wdr);
+        dm.addWeatherData(destination);
+    }
+    
+    public void showForecastData(Destination destination)
+    {
+        tbWeatherData.setModel(fdm);
+        tbWeatherData.setDefaultRenderer(Object.class, fdr);
+        fdm.addForecastData(destination);
     }
 
     /**
@@ -32,8 +55,7 @@ public class WeatherDataGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbWeatherData = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         tbWeatherData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

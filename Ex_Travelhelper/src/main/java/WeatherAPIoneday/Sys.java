@@ -1,4 +1,4 @@
-package BL;
+package WeatherAPIoneday;
 
 public class Sys {
 
