@@ -1,0 +1,14 @@
+<destinations>
+  <destination>
+    <name>Preding</name>
+    <zipcode>8504</zipcode>
+  </destination>
+  <destination>
+    <name>Wien</name>
+    <zipcode>1010</zipcode>
+  </destination>
+  <destination>
+    <name>Heimschuh</name>
+    <zipcode>8451</zipcode>
+  </destination>
+</destinations>

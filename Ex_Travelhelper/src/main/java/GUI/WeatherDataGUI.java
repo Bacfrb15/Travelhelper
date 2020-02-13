@@ -69,6 +69,14 @@ public class WeatherDataGUI extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tbWeatherData);
+        if (tbWeatherData.getColumnModel().getColumnCount() > 0) {
+            tbWeatherData.getColumnModel().getColumn(0).setMinWidth(4);
+            tbWeatherData.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tbWeatherData.getColumnModel().getColumn(0).setMaxWidth(5);
+            tbWeatherData.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tbWeatherData.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tbWeatherData.getColumnModel().getColumn(3).setPreferredWidth(10);
+        }
 
         getContentPane().add(jScrollPane1);
 

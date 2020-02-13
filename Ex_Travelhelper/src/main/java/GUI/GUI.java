@@ -6,6 +6,11 @@
 package GUI;
 
 import WeatherAPIoneday.Destination;
+import XML.XMLAccess;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,12 +18,17 @@ import WeatherAPIoneday.Destination;
  */
 public class GUI extends javax.swing.JFrame {
 
-    private WeatherTableModel tm = new WeatherTableModel();
-    private WeatherDataGUI dg = new WeatherDataGUI();
-    
+    private final WeatherTableModel tm = new WeatherTableModel();
+    private final WeatherDataGUI dg = new WeatherDataGUI();
+    XMLAccess access = XMLAccess.getInstance();
     public GUI() {
         initComponents();
         tbDataTable.setModel(tm);
+        ArrayList<Destination> destinations = new ArrayList();
+        destinations = access.getDestinations();
+        for (Destination destination : destinations) {
+            tm.addDestination(destination);
+        }
     }
 
     /**
@@ -30,34 +40,18 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDataTable = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        jMenuItem3.setText("Show Weather Data");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onWeatherData(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem3);
-
-        jMenuItem4.setText("Show 5 Day Forecast");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onForecastData(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem4);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         tbDataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,17 +64,36 @@ public class GUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbDataTable.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(tbDataTable);
 
         getContentPane().add(jScrollPane1);
+
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jButton1.setText("show WeatherData");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showWeatherData(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+
+        jButton2.setText("Show 5 Day Forecast");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onForecastData(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+
+        getContentPane().add(jPanel1);
 
         jMenu1.setText("Edit");
 
         jMenuItem1.setText("Add");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onAddDestination(evt);
+                onWeatherData(evt);
             }
         });
         jMenu1.add(jMenuItem1);
@@ -100,31 +113,36 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void onAddDestination(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAddDestination
+    private void onWeatherData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onWeatherData
         Dialog dlg = new Dialog(this, true);
         dlg.setVisible(true); 
         if(dlg.isOk())
         {
             Destination d = dlg.getD();
-            tm.addDestination(d);           
+            tm.addDestination(d);
+            try {
+                access.saveOnXML(d);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }//GEN-LAST:event_onAddDestination
+    }//GEN-LAST:event_onWeatherData
 
     private void onRemove(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRemove
        int idx = tbDataTable.getSelectedRow();
        tm.deleteDestinations(idx);
     }//GEN-LAST:event_onRemove
 
-    private void onWeatherData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onWeatherData
-        dg.setVisible(true);
-        dg.showWeatherData(tm.getDestinations());
-    }//GEN-LAST:event_onWeatherData
-
     private void onForecastData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onForecastData
         dg.setVisible(true);
         dg.showForecastData(tm.getDestination(tbDataTable.getSelectedRow()));
     }//GEN-LAST:event_onForecastData
 
+    private void showWeatherData(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWeatherData
+        dg.setVisible(true);
+        dg.showWeatherData(tm.getDestinations());
+    }//GEN-LAST:event_showWeatherData
+                 
     /**
      * @param args the command line arguments
      */
@@ -161,13 +179,13 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbDataTable;
     // End of variables declaration//GEN-END:variables

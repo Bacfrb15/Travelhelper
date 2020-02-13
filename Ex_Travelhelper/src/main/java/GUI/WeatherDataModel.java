@@ -93,8 +93,6 @@ public class WeatherDataModel extends AbstractTableModel{
                 weatherdata.add(w);
                 fireTableRowsInserted(weatherdata.size()-1, weatherdata.size()-1);
             }
-            
-            
         } 
     }
 }
